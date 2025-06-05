@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Employee Management Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        .topright {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 15px;
+        }
+
+        body {
+            background-image: url('https://xmple.com/wallpaper/gradient-white-blue-linear-1600x900-c2-faebd7-00ffff-a-285-f-14.svg');
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1><b>About the Application</b></h1>
+        <br><br>
+        <div class="row">
+            <a th:href="@{/employee/home}" class="topright">Back to home</a>
+            <div class="container">
+                <div class="row">
+                    <b>Name:</b> Employee Management Application
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <b>Description:</b> An employee management application based on REST api and Spring boot
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <b>Version:</b> 1.0.5
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+//Shutdown
+function makeAjaxCall() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/employee/about',
+        success: function (data) {
+            console.log('Ajax call successful');
+
+            // Make the next AJAX call after a delay
+            setTimeout(makeAjaxCall, 2000); // 2 seconds delay
+        },
+        error: function (xhr, status, error) {
+            console.error('Ajax call error:', status, error);
+
+            // Retry after an error with a delay
+            setTimeout(makeAjaxCall, 2000); // 2 seconds delay
+        }
+    });
+}
+$(document).ready(function () {
+    // Start the AJAX calls
+    makeAjaxCall();
+});
+</script>
+</html>

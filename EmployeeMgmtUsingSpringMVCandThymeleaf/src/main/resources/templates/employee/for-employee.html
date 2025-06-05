@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Employee Management Application</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<style>
+		.topright {
+			position: absolute;
+			top: 8px;
+			right: 10px;
+			font-size: 15px;
+		}
+
+		body {
+			background-image: url('https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg');
+		}
+	</style>
+</head>
+
+<!-- ... (head section remains unchanged) -->
+
+<body>
+
+	<div class="container">
+		<h1><b>Employee Directory Table (Role:EMPLOYEE)</b></h1>
+		<br><br>
+
+		<div class="row"> <!-- Add this row div -->
+			<!-- Back to home link -->
+			<a th:href="@{/employee/home}" class="topright">Back to home</a>
+
+			<!-- Search Form -->
+			<div class="col-md-4 form-group">
+				<form th:action="@{/employee/showFormSearch}" method="GET">
+					<input type="text" class="form-control mb-4" name="find" placeholder="Employee ID"
+						style="width: 100%" />
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+		</div> <!-- Close the row div -->
+
+		<br>
+
+		<!-- Table specification -->
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>Employee ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="i : ${emplist}">
+					<td th:text="${i.id}" />
+					<td th:text="${i.firstname}" />
+					<td th:text="${i.lastname}" />
+					<td th:text="${i.email}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

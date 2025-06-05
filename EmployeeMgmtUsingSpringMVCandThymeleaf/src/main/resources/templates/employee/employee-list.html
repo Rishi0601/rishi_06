@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Employee Management Application</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+		.topright {
+			position: absolute;
+			top: 8px;
+			right: 10px;
+			font-size: 15px;
+		}
+
+		body {
+			background-image: url('https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg');
+		}
+	</style>
+	<script>
+		function emptySearchBox() {
+			var sbox = document.getElementsByName('find')[0].value.trim();
+			if (!sbox) {
+				alert('Please enter a valid Employee ID!!!');
+				return false;
+			}
+			var empid = Array.from(document.querySelectorAll('#tab1 tbody td:nth-child(1)'))
+				.some(cell => cell.textContent.trim() === sbox);
+			if (!empid) {
+				alert('Employee ID could not be found');
+				return false;
+			}
+			return true;
+		}
+	</script>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1><b>Employee Directory Table (Role:ADMIN)</b></h1>
+		<br><br>
+
+		<div class="row"> <!-- Add this row div -->
+			<!-- Back to home link -->
+			<a th:href="@{/employee/home}" class="topright">Back to home</a>
+
+			<!-- Search Form -->
+			<div class="col-md-4 form-group">
+				<form th:action="@{/employee/showFormSearch}" method="GET" onsubmit="return emptySearchBox()">
+					<input type=" text" class="form-control mb-4" name="find" placeholder="Employee ID"
+						style="width: 100%" />
+					<button type="submit" id="searchbox" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+
+			<!-- Add Button -->
+			<div class="col-md-12 text-right">
+				<a th:href="@{/employee/showForm}" class="btn btn-success">Add Employee</a>
+			</div>
+		</div> <!-- Close the row div -->
+
+		<br>
+
+		<!-- Table specification -->
+		<table class="table" id="tab1">
+			<thead class="thead-dark">
+				<tr>
+					<th>Employee ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="i : ${emplist}">
+					<td th:text="${i.id}" />
+					<td th:text="${i.firstname}" />
+					<td th:text="${i.lastname}" />
+					<td th:text="${i.email}" />
+					<td>
+						<a th:href="@{/employee/showFormUpdate(id=${i.id})}" class="btn btn-primary">Update</a>
+						/
+						<a th:href="@{/employee/delete(id=${i.id})}" class="btn btn-danger"
+							onclick="if (!(confirm('Are you sure you want to delete the employee?'))) return false">
+							Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			$(document).ready(function () {
+				$(window).on('unload', function () {
+					$.ajax({
+						url: "http://localhost:8080/employee/shutdown", type: "POST", async: false, success: function () {
+							console.log("Shutdown request sent successfully");
+						},
+						error: function () {
+							console.error("Error sending shutdown request");
+						}
+					});
+				});
+			});
+		</script>
+	</div>
+</body>
+
+</html>

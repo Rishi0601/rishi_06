@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Head content... -->
+	<style>
+		.sizereducer {
+
+			font-size: 0.750em;
+			/* 14px/16=0.875em */
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		body {
+			background-image: url('https://t4.ftcdn.net/jpg/01/31/15/51/240_F_131155172_4ZVdaT7YF5yJHqircjy59DDxV6aWFds9.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+	</style>
+</head>
+
+<body>
+	<h1><b>Employee Result List</b></h1>
+	<br><br>
+	<div class="container">
+		<div sec:authorize="hasRole('EMPLOYEE')">
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Employee ID</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${employee!=null}" th:each="emp : ${employee}">
+						<td th:text="${emp.id}" />
+						<td th:text="${emp.firstname}" />
+						<td th:text="${emp.lastname}" />
+						<td th:text="${emp.email}" />
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div sec:authorize="hasRole('MANAGER')">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Employee ID</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="i : ${employee}">
+						<td th:text="${i.id}" />
+						<td th:text="${i.firstname}" />
+						<td th:text="${i.lastname}" />
+						<td th:text="${i.email}" />
+						<td>
+							<a th:href="@{/employee/showFormUpdate(id=${i.id})}" class="btn btn-primary">Update</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div sec:authorize="hasRole('ADMIN')">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Employee ID</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="i : ${employee}">
+						<td th:text="${i.id}" />
+						<td th:text="${i.firstname}" />
+						<td th:text="${i.lastname}" />
+						<td th:text="${i.email}" />
+						<td>
+							<a th:href="@{/employee/showFormUpdate(id=${i.id})}" class="btn btn-primary">Update</a>
+							/
+							<a th:href="@{/employee/delete(id=${i.id})}" class="btn btn-danger"
+								onclick="if (!(confirm('Are you sure you want to delete the employee?'))) return false">
+								Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<a th:href="@{/employee/list}" class="sizereducer">Back to employee list</a>
+		<!-- Add link/button to navigate back to the employee list or other actions -->
+	</div>
+</body>
+
+</html>

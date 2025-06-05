@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add Employee To Database</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		.center-box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 60vh;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		.sizereducer {
+
+			font-size: 0.750em;
+			/* 14px/16=0.875em */
+		}
+
+		body {
+			background-image: url('https://www.shutterstock.com/shutterstock/photos/1914443272/display_1500/stock-vector-abstract-technology-communication-concept-vector-background-1914443272.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+	</style>
+	<script>
+		function addEmployeeCredCheck() {
+			var fname = document.getElementById('firstname').value.trim();
+			var lname = document.getElementById('lastname').value.trim();
+			var email = document.getElementById('email').value.trim();
+
+			if (!fname || !lname || !email) {
+				alert("Firstname or lastname or email cannot be empty!!!");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</head>
+
+<body>
+	<h1><b>Add Employee</b></h1>
+	<br>
+	<form action="#" th:action="@{/employee/add}" th:object="${employee}" method="POST"
+		onsubmit="return addEmployeeCredCheck()">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<div class="center-box">
+					<input type="hidden" th:field="${employee.id}" />
+					<input type="text" class="form-control mb-4 w-25" th:field="${employee.firstname}"
+						placeholder="Firstname?" />
+					<input type="text" class="form-control mb-4 w-25" th:field="${employee.lastname}"
+						placeholder="Lastname?" />
+					<input type="text" class="form-control mb-4 w-25" th:field="${employee.email}"
+						placeholder="Email" />
+					<button type="submit" class="btn btn-primary">Save</button>
+					<a th:href="@{/employee/list}" class="sizereducer">Back to Employee List</a>
+				</div>
+			</div>
+		</div>
+	</form>
+	<hr>
+</body>
+
+</html>
