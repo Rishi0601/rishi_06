@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="runner.TestRunner">
+        <methods>
+          <include name="testPlasticMachinery"/>
+          <include name="testNavigateToLEDTubeLink"/>
+          <include name="testVerifyApparel"/>
+          <include name="testLinksUnderProductDirectory"/>
+          <include name="testMachineToolsLink"/>
+          <include name="test10"/>
+          <include name="test11"/>
+          <include name="testVerifyMotorcycles"/>
+          <include name="testVerifyAutoParts"/>
+          <include name="testVerifyFurniture"/>
+          <include name="testVerifyComputerProducts"/>
+          <include name="testForInCorrectCredentials"/>
+          <include name="teardown"/>
+          <include name="testHomepageElements"/>
+          <include name="testWoodWorkingMachineryLink"/>
+          <include name="testFurniture"/>
+          <include name="testEngineeringAndConstructionLink"/>
+          <include name="testVerifyGifts"/>
+          <include name="testLEDLightsLink"/>
+          <include name="testMouldLink"/>
+          <include name="testConsumerElectronics"/>
+          <include name="testWires"/>
+          <include name="testSpices"/>
+          <include name="launch"/>
+          <include name="testForCorrectCredentials"/>
+          <include name="testVerifyBags"/>
+          <include name="testVerifyBuildingMaterials"/>
+          <include name="testVerifyElectricalEquipments"/>
+          <include name="testVerifyElectricalComponents"/>
+          <include name="testCastingAndForgingLink"/>
+          <include name="testLaserLink"/>
+          <include name="testEmptySearch"/>
+          <include name="testVerifySealing"/>
+          <include name="test9"/>
+          <include name="testAgricultureLink"/>
+          <include name="test8"/>
+          <include name="test7"/>
+          <include name="test6"/>
+        </methods>
+      </class> <!-- runner.TestRunner -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
